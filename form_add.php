@@ -58,11 +58,17 @@
 					</li>
 				</ul>
 			</div></div>
+
+			<?php if (isset($_POST['globalSubmit'])) {
+				echo '<div class="row"><div class="offset-lg-2 col-md-8 my-5">
+						<div class="alert alert-success">Character <strong>'.$_POST['selectNames'].'</strong> with <strong>'.$_POST['selectClass'].'</strong> class has been added successfully.</div></div>';
+				} ?>
 		</div>
 
+			
 		<?php
 		//include my Class for JSON saving
-		include 'classes/jsonAdd.php';
+		include 'classes/CharaInJSON.php';
 		//if I clicks submit button, it activates the addToJSON method ?
 		if (isset($_POST['globalSubmit'])) {
 			$charaAdd=new CharaInJSON($_POST['selectNames'], $_POST['selectClass'], $_POST['selectImg']);

@@ -13,7 +13,8 @@ class CharaInJSON {
 
 	//methods
 	public function addToJSON() {
-		$data=json_decode('data/dataBase.json', true);
+		$file=file_get_contents('data/dataBase.json', true);
+		$data=json_decode($file);
 	    if (empty($data)) {
 	    	$max_id=0;
 		}
@@ -27,23 +28,17 @@ class CharaInJSON {
 		//modify the position of the text pointer
 		fseek($handle, 0, SEEK_END);
 		// are we at the end or is the file empty
-	    if (ftell($handle) > 0) {
-	    	
+	    if (ftell($handle) > 0) {	    	
 	        // move back a byte
 	        fseek($handle, -1, SEEK_END);
-
 	        // add the trailing comma
 	        fwrite($handle, ',', 1);
-
 	        // add the new json string
 	        fwrite($handle, json_encode($chara) . ']');
-	    }
-	    else {
-	    	
+	    } else {	    	
 	        // write the first event inside an array
 	        fwrite($handle, json_encode(array($chara)));
 	    }
-
 	    // close the handle on the file
 	    fclose($handle);
 	}
