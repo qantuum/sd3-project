@@ -102,46 +102,52 @@
 			</div>
 			<div class="col-md-10">
 
-		
+				<?php
+				function genTeam() {
+					$file=file_get_contents('data/dataBase.json');
+					$data=json_decode($file, true);
+					$nbOne=intval(rand(0,23));
+					$nbTwo=$nbOne;
+					while ($data[$nbTwo]["name"]==$data[$nbOne]["name"]) {
+						$nbTwo=intval(rand(0,23));
+					}
+					$nbThree=$nbTwo;
+					while ($data[$nbThree]["name"]==$data[$nbTwo]["name"] || $data[$nbThree]["name"]==$data[$nbOne]["name"]) {
+						$nbThree=intval(rand(0,23));
+					}
+					$trio=array($nbOne,$nbTwo,$nbThree);
+					return $trio;
+				}				
+				$trio = genTeam();
+				?>
 
-		<?php
-			//first character
-			$randGenOne=intval(rand(0,23));
-			$memberOne=$data[$randGenOne]["class"];
-			// echo $randGenOne;
-			// echo $memberOne;
-			// echo '<img src="'.$data[$randGenOne]["img"].'">';
-			// echo '<br />';
+				<div class="row"><div class="offset-md-3 col-md-6">
+					<div class="row">
+						<div class="col p-3 img-thumbnail list-group-item-success">
+							<div class="d-flex flex-column justify-content-end align-items-center">
+								<h4 class="text-center h4"><?php echo $data[$trio[0]]["name"]; ?></h4>
+								<h5 class="text-center h5"><?php echo $data[$trio[0]]["class"]; ?></h5>
+								<img class="text-center" src="<?php echo $data[$trio[0]]["img"]; ?>" alt="img">
+							</div>
+						</div>
+						<div class="col p-3 img-thumbnail list-group-item-warning">
+							<div class="d-flex flex-column justify-content-end align-items-center">
+								<h4 class="text-center h4"><?php echo $data[$trio[1]]["name"]; ?></h4>
+								<h5 class="text-center h5"><?php echo $data[$trio[1]]["class"]; ?></h5>
+								<img class="text-center" src="<?php echo $data[$trio[1]]["img"]; ?>" alt="img">
+							</div>
+						</div>
+						<div class="col p-3 img-thumbnail list-group-item-danger">
+							<div class="d-flex flex-column justify-content-end align-items-center">
+								<h4 class="text-center h4"><?php echo $data[$trio[2]]["name"]; ?></h4>
+								<h5 class="text-center h5"><?php echo $data[$trio[2]]["class"]; ?></h5>
+								<img class="text-center" src="<?php echo $data[$trio[2]]["img"]; ?>" alt="img">
+							</div>
+						</div>
+				</div></div>
 
-			//second character -- Must be a character different from first
-			$randGenTwo=$randGenOne;
-			while ($data[$randGenTwo]["name"]==$data[$randGenOne]["name"]) {
-				$randGenTwo=intval(rand(0,23));
-				$memberTwo=$data[$randGenTwo]["class"];
-			}
-			// echo $randGenTwo;
-			// echo $memberTwo;
-			// echo '<img src="'.$data[$randGenTwo]["img"].'">';
-			// echo '<br />';
-
-			//third character -- Must be different from first and second
-			$randGenThree=$randGenTwo;
-			while ($data[$randGenThree]["name"]==$data[$randGenTwo]["name"] || $data[$randGenThree]["name"]==$data[$randGenOne]["name"]) {
-				$randGenThree=intval(rand(0,23));
-				$memberThree=$data[$randGenThree]["class"];
-			}
-			// echo $randGenThree;
-			// echo $memberThree;
-			// echo '<img src="'.$data[$randGenThree]["img"].'">';
-
-			// echo '<br />';
-			// $uniqueId=$randGenOne.$randGenTwo.$randGenThree;
-			// echo $uniqueId;
-
-		?>
-
+			</div>
 		</div>
-	</div>
 
 	<!-- Bootstrap JS CDN -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
