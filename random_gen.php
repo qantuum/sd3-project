@@ -23,6 +23,7 @@
 
 	$file=file_get_contents('data/dataBase.json');
 	$data=json_decode($file, true);
+	require_once('./classes/CharaDetails.php');
 
 	?>
 
@@ -36,45 +37,13 @@
 
 		<div class="row">
 			<div class="col-md-2">
-				<form id="formPanel">
+				<form action="#" method="post" id="formPanel">
 					<legend class="text-primary">Controls</legend>
 					<fieldset class="form-group">
 						<legend class="text-secondary">Randomize all</legend>
-						<input class="form-control btn btn-success" type="button" value="Randomize All!">
-					</fieldset>
+						<input class="form-control btn btn-danger" name="submitAllRandom" id="submitAllRandom" type="submit" value="Randomize All!">
 					<fieldset class="form-group">
-						<legend class="text-secondary">Sort by Character Name</legend>
-						<select class="form-control">
-							<option>Randomize !</option>
-							<option>Kevin</option>
-							<option>Angela</option>
-							<option>Duran</option>
-							<option>Carlie</option>
-							<option>Hawk</option>
-							<option>Riesz</option>
-						</select>
-						<select class="form-control">
-							<option>Randomize !</option>
-							<option>Kevin</option>
-							<option>Angela</option>
-							<option>Duran</option>
-							<option>Carlie</option>
-							<option>Hawk</option>
-							<option>Riesz</option>
-						</select>
-						<select class="form-control">
-							<option>Randomize !</option>
-							<option>Kevin</option>
-							<option>Angela</option>
-							<option>Duran</option>
-							<option>Carlie</option>
-							<option>Hawk</option>
-							<option>Riesz</option>
-						</select>
-						<input type="button" class="form-control btn btn-success" value="Send !">
-					</fieldset>
-					<fieldset class="form-group">
-						<legend class="text-secondary">Sort by Character class</legend>
+						<legend class="text-secondary">Sort by Character/Class</legend>
 						<select class="form-control">
 							<option>Randomize !</option>
 							<?php
@@ -96,16 +65,15 @@
 								echo '<option>'.$data[$i]["class"].'</option>';
 							} ?>
 						</select>
-						<input type="button" class="form-control btn btn-success" value="Send !">
+						<input type="submit" id="sortSubmit" name="sortSubmit" class="form-control btn btn-danger" value="Send !">
 					</fieldset>
 				</form>
 			</div>
 			<div class="col-md-10">
 
 				<?php
-				function genTeam() {
-					$file=file_get_contents('data/dataBase.json');
-					$data=json_decode($file, true);
+				//standard landing page -- generates an array giving character's class IDs for display
+				function genTeam($data) {
 					$nbOne=intval(rand(0,23));
 					$nbTwo=$nbOne;
 					while ($data[$nbTwo]["name"]==$data[$nbOne]["name"]) {
@@ -118,33 +86,63 @@
 					$trio=array($nbOne,$nbTwo,$nbThree);
 					return $trio;
 				}				
-				$trio = genTeam();
+				$trio = genTeam($data);
+
+				//when clicks on button "Randomize all" -- same than landing page
+				if (isset($_POST["submitAllRandom"])) {
+					$trio = genTeam($data);
+				}
+
+				function addScore($data, $trio) {
+					return $data[$trio[0]]["score"]+$data[$trio[1]]["score"]+$data[$trio[2]]["score"];
+				}
+
 				?>
 
-				<div class="row"><div class="offset-md-3 col-md-6">
+				<!-- displaying the generated team -->
+				<div class="row"><div class="offset-md-2 col-md-8">
 					<div class="row">
-						<div class="col p-3 img-thumbnail list-group-item-success">
-							<div class="d-flex flex-column justify-content-end align-items-center">
-								<h4 class="text-center h4"><?php echo $data[$trio[0]]["name"]; ?></h4>
-								<h5 class="text-center h5"><?php echo $data[$trio[0]]["class"]; ?></h5>
-								<img class="text-center" src="<?php echo $data[$trio[0]]["img"]; ?>" alt="img">
-							</div>
+						<div class="col-md-12 list-group-item-light pb-2">
+							<h3 class="h3 text-center">Your team result</h3>
 						</div>
-						<div class="col p-3 img-thumbnail list-group-item-warning">
-							<div class="d-flex flex-column justify-content-end align-items-center">
-								<h4 class="text-center h4"><?php echo $data[$trio[1]]["name"]; ?></h4>
-								<h5 class="text-center h5"><?php echo $data[$trio[1]]["class"]; ?></h5>
-								<img class="text-center" src="<?php echo $data[$trio[1]]["img"]; ?>" alt="img">
-							</div>
+						<div class="col-md-12 list-group-item-light p-2">
+							<h4 class="h4">What will be your focus ?</h4>
+							<p>In <a href="">Apolaris82's gamefaq</a>, he explains that he made a calculation system to determine if the team is magic-focused or melee-focused. I decided to turn this calculation into an algorithm, to train my PHP skillz, and also for fun. For me this is a nice tool, because it gives a more visual output than this gamefaqs layout, and the random team generation is just neat.</p>
+							<ul class="list-group">
+								<li class="list-group-item">Team score : <strong><?php echo addScore($data, $trio); ?></strong> ~ Final score : <strong>78</strong></li>
+								<li class="list-group-item">We have a <strong>Magical</strong> focus over here.</p>
+							</ul>
 						</div>
-						<div class="col p-3 img-thumbnail list-group-item-danger">
-							<div class="d-flex flex-column justify-content-end align-items-center">
-								<h4 class="text-center h4"><?php echo $data[$trio[2]]["name"]; ?></h4>
-								<h5 class="text-center h5"><?php echo $data[$trio[2]]["class"]; ?></h5>
-								<img class="text-center" src="<?php echo $data[$trio[2]]["img"]; ?>" alt="img">
-							</div>
-						</div>
+						<?php
+							$teamOne=new CharaDetails($data, $trio[0]);
+							$teamOne->display($data, $trio[0], 'success');
+
+							$teamTwo=new CharaDetails($data, $trio[1]);
+							$teamTwo->display($data, $trio[1], 'info');
+
+							$teamThree=new CharaDetails($data, $trio[2]);
+							$teamThree->display($data, $trio[2], 'primary');
+						?>
+					</div>
 				</div></div>
+
+				<div class="row"><div class="offset-md-2 col-md-8 list-group-item-dark p-2">
+					<h4 class="h4">Team details</h4>
+					<ul class="list-group">
+						<li class="list-group-item p-1">
+							This team has good interaction since a multi-stats-ups (MTSU) and a multi-stats-down (MTSD) allow to damage foes more easily.
+						</li>
+						<li class="list-group-item p-1">
+							This appears particularily in boss battles.
+						</li>
+						<li class="list-group-item p-1">
+							A better class combination though would be [A,B,C]! Try it sometime! <a href="#" class="badge badge-pill badge-info badge-link">Try it!</a>
+						</li>
+					</ul>
+				</div></div>
+
+				<div class="my-5"></div>
+				<div class="my-5"></div>
 
 			</div>
 		</div>
