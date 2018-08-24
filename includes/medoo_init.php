@@ -13,9 +13,9 @@ $database = new Medoo([
 	'database_type' => 'mysql',
 	'database_name' => 'sd3-project',
 	'server' => 'localhost',
-	'username' => "root",
-	'password' => "CSS3HTML5",
-	'charset' => 'utf8',
+	'username' => $id_pmyadmin,
+	'password' => $pass
+	'charset' => 'utf8'
 ]) ;
 
 // constant names
