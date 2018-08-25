@@ -14,13 +14,13 @@ $database = new Medoo([
 	'database_name' => 'sd3-project',
 	'server' => 'localhost',
 	'username' => $id_pmyadmin,
-	'password' => $pass
+	'password' => $pass,
 	'charset' => 'utf8'
 ]) ;
 
 // constant names
 class Constants {
-	
+
 	const TABLE_SD3_CHARAS = "characters";
 	const TABLE_SD3_CHARAS_ID = "id";
 	const TABLE_SD3_CHARAS_NAME = "name";

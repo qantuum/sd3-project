@@ -1,5 +1,5 @@
 <?php
 
 
-$id_pmyadmin="foo";
-$pass="bar";
+$id_pmyadmin="root";
+$pass="";
