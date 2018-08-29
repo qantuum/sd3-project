@@ -35,4 +35,24 @@ class Constants {
 	const TABLE_SD3_CHARAS_PROS = "pros";
 	const TABLE_SD3_CHARAS_CONS = "cons";
 	const TABLE_SD3_CHARAS_AFFILIATES = "affiliates";
+
+	const ACCESS = "root$";
+	const ROOT_ID = "root_id$";
+	const ROOT_PSWD = "root_pswd";
+
+	const TABLE_SD3_TEAMS = "teams";
+	const TABLE_SD3_TEAMS_ID = "team_id";
+	const TABLE_SD3_TEAMS_TRIAD = "team_triad";
+	const TABLE_SD3_TEAMS_BASE_SCORE = "team_base_score";
+	const TABLE_SD3_TEAMS_FINAL_SCORE = "team_final_score";
+	const TABLE_SD3_TEAMS_PROS = "team_pros";
+	const TABLE_SD3_TEAMS_CONS = "team_cons";
+	const TABLE_SD3_TEAMS_QUEST = "team_quest";
+	const TABLE_SD3_TEAMS_BETTER = "team_better";
+	const TABLE_SD3_TEAMS_HAS_SPELL = "team_has_spell";
+
+	const TABLE_TIPS = "tips";
+	const TABLE_TIPS_ID = "tips_id";
+	const TABLE_TIPS_TITLE = "tips_title";
+	const TABLE_TIPS_TEXT = "tips_text";
 }
