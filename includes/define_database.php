@@ -56,3 +56,26 @@ class Constants {
 	const TABLE_TIPS_TITLE = "tips_title";
 	const TABLE_TIPS_TEXT = "tips_text";
 }
+
+// DO NOT CHANGE ONCE EVERYTHING IS REGISTERED IN "charas" DB !!!
+class TargetSpells {
+	// sabers
+	const ELEM_SABERS_ST = "ST elemental sabers";
+	const ELEM_SABERS_MT = "MT elemental sabers";
+	const SABER_S = "saint saber ST";
+	const SABER_D = "dark saber ST";
+	const SABER_T = "tree saber ST";
+	const SABER_M = "moon saber ST";
+	// stat magic
+	const STATS_UP_ST = "ST stats up";
+	const STATS_UP_MT = "MT stats up";
+	const STATS_DWN_ST = "ST stats down";
+	const STATS_DWN_MT = "MT stats down";
+	// various
+	const DEMON_BREATH = "demon breath";
+	const AURA_WAVE = "aura wave";
+	// Jutsus
+	const JUTSUS = "jutsus";
+
+
+}

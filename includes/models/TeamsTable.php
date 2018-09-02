@@ -4,10 +4,10 @@ include_once __DIR__."/../define_database.php" ;
 
 class TeamsTable
 {
-  global $database;
 
   function init_empty_team(array $arrayids, $score1, $score2, $score3)
   {
+    global $database;
     $res = $database->insert(Constants::TABLE_SD3_TEAMS, [
 			Constants::TABLE_SD3_TEAMS_TRIAD => implode('', $arrayids),
 			Constants::TABLE_SD3_TEAMS_BASE_SCORE => $score1 + $score2 + $score3,

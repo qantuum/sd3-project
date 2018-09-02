@@ -9,11 +9,14 @@ class Access
     global $database;
     $data = $database->get(Constants::ACCESS, "*", [
 			Constants::ROOT_ID => $id
+    ]);
     if (count($data)==1 || password_verify($pswd, $data[Constants::ROOT_PSWD])) {
       return true ;
     }
-    else {
+    else
+    {
       return false ;
+    }
   }
 
   function create_my_root($id, $pswd)

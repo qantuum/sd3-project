@@ -4,10 +4,10 @@ include_once __DIR__."/../define_database.php" ;
 
 class CharaTable
 {
-	global $database;
 
 	function add_chara_simple($id, $name, $class, $img)
 	{
+		global $database;
 		$res = $database->insert(Constants::TABLE_SD3_CHARAS, [
 			Constants::TABLE_SD3_CHARAS_ID => $id,
 			Constants::TABLE_SD3_CHARAS_NAME => $name,
@@ -23,11 +23,12 @@ class CharaTable
 			Constants::TABLE_SD3_CHARAS_CONS => " ",
 			Constants::TABLE_SD3_CHARAS_AFFILIATES => " "
 		]);
-		$id = get_database()->id();
+		$id = $database->id();
 	}
 
 	function set_chara_details ($id, $light_dark, $score, array $min_stats, array $max_stats, array $spells, array $techs, $pros, $cons, $affiliates)
 	{
+		global $database;
 		$res = $database->update(Constants::TABLE_SD3_CHARAS, [
 			Constants::TABLE_SD3_CHARAS_LIGHT_DARK => $light_dark,
 			Constants::TABLE_SD3_CHARAS_SCORE => $score,
@@ -46,19 +47,24 @@ class CharaTable
 
 	function get_chara_allinfo_by_id($id)
 	{
-		$data = get_database()->get(Constants::TABLE_SD3_CHARAS, "*", [
+		global $database;
+		$data = $database->get(Constants::TABLE_SD3_CHARAS, "*", [
 			Constants::TABLE_SD3_CHARAS_ID => $id
 		] );
-		foreach ($data as $piece)
+		if ($data)
 		{
-			// json decode the informations
+			$data[Constants::TABLE_SD3_CHARAS_MIN_STATS] = json_decode($data[Constants::TABLE_SD3_CHARAS_MIN_STATS], true);
+			$data[Constants::TABLE_SD3_CHARAS_MAX_STATS] = json_decode($data[Constants::TABLE_SD3_CHARAS_MAX_STATS], true);
+			$data[Constants::TABLE_SD3_CHARAS_SPELLS] = json_decode($data[Constants::TABLE_SD3_CHARAS_SPELLS], true);
+			$data[Constants::TABLE_SD3_CHARAS_TECHS] = json_decode($data[Constants::TABLE_SD3_CHARAS_TECHS], true);
 		}
 		return $data ;
 	}
 
 	function get_chara_lines_by_name($name)
 	{
-		$data = get_database()->get(Constants::TABLE_SD3_CHARAS, "*", [
+		global $database;
+		$data = $database->get(Constants::TABLE_SD3_CHARAS, "*", [
 			Constants::TABLE_SD3_CHARAS_NAME => $name
 		] );
 		return $data ;
@@ -70,7 +76,8 @@ class CharaTable
 
 	function get_chara_details_by_id($id)
 	{
-		$data = get_database()->get(Constants::TABLE_SD3_CHARAS, [
+		global $database;
+		$data = $database->get(Constants::TABLE_SD3_CHARAS, [
 			Constants::TABLE_SD3_CHARAS_LIGHT_DARK,
 			Constants::TABLE_SD3_CHARAS_SCORE,
 			Constants::TABLE_SD3_CHARAS_MIN_STATS,
@@ -83,10 +90,18 @@ class CharaTable
 		], [
 			Constants::TABLE_SD3_CHARAS_ID => $id
 		] );
-		foreach ($data as $piece)
-		{
-			// json decode the informations
-		}
+		$var=array();
+		// foreach ($data as $piece)
+		// {
+		// 	$var[] = $piece;
+		// }
 		return $data ;
+	}
+
+	function get_chara_count()
+	{
+		global $database;
+		$res = $database->count(Constants::TABLE_SD3_CHARAS, "*") ;
+		return $res ;
 	}
 }
