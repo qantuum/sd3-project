@@ -1,4 +1,4 @@
 <?php
 
 $id_pmyadmin="root";
-$pass="";
+$pass="CSS3HTML5";

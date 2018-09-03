@@ -1,8 +1,8 @@
 <?php
 
-include_once __DIR__."/includes/models/CharaTable.php";
-include_once __DIR__."/includes/models/TeamsTable.php";
-include_once __DIR__."/includes/models/Access.php";
+include_once "../models/CharaTable.php";
+include_once "../models/TeamsTable.php";
+include_once "../models/Access.php";
 
 $spells1=json_encode(array("heal light ST", TargetSpells::AURA_WAVE));
 $spells2=json_encode(array("heal light MT", "invocations", TargetSpells::DEMON_BREATH));
@@ -30,3 +30,7 @@ echo in_array("demon", $chara2["spells"]) ? 1 : 0;
 echo in_array(TargetSpells::DEMON_BREATH, $chara2["spells"]) ? 1 : 0;
 echo in_array("Demon breath", $chara2["spells"]) ? 1 : 0;
 echo in_array("rienavoir", $chara2["spells"]) ? 1 : 0;
+
+$chara = new CharaTable();
+$card = $chara->displayMyChara(1);
+echo $card;

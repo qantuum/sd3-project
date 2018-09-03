@@ -4,7 +4,7 @@
 
 	<head>
 		<!-- title -->
-		<title>Regular users panel</title>
+		<title>Root panel</title>
 		<!-- favicon -->
 		<link rel="icon" href="http://www.videogamesprites.net/SeikenDensetsu3/Magic/Ancient.gif">
 		<meta charset="utf-8">
@@ -30,14 +30,14 @@
 				<div class="col-md-12">
 					<div class="jumbotron">
 						<h3 class="h3 text-center">Seiken Densetsu 3 random team Generator</h3>
-						<h5 class="h5 text-center text-secondary">Designed with the help of a team formation guide</h5>
+						<h5 class="h5 text-center text-secondary">ROOT PANEL : BUILDING DATABASE</h5>
 					</div>
 				</div>
 			</div>
 
 			<div class="row">
 				<!-- left panel with team select controls -->
-        <?php if ($nb_chara >= 24) : ?>
+        		<?php if ($nb_chara >= 24) : ?>
 				<div class="col-lg-2">
 					<form action="#" method="post" id="formPanel">
 						<legend class="text-danger text-center">Controls</legend>
@@ -168,73 +168,58 @@
 						</fieldset>
 					</form>
 				</div>
-      <?php endif ?>
+				<?php else : ?>
+				<div class="offset-lg-2">
+				</div>
+      			<?php endif ?>
 
 				<!-- center panel with team results -->
 				<div class="col-lg-8">
 					<h3 class="h3 text-center list-group-item-light pb-2 text-secondary">Team edition panel </h3>
 
-          <!-- form add chara -->
-          <?php if ($nb_chara >= 24) : ?>          ?>
-					<!-- first section with the three characters inside -->
-					<div class="row">
-						<div class="col-md-4 card">
-							<div class="card-header">
-								<div class="d-flex flex-column align-items-center">
-									<img src="http://www.videogamesprites.net/SeikenDensetsu3/NPCs/Victor.gif" alt="victor" style="height:3.6rem;width:auto;">
-						    		<h4 class="h4 my-2 text-danger" data-toggle="tooltip" data-placement="top" title="Nom de mon héros">Victor</h4>
-						    		<h5 data-toggle="tooltip" data-placement="top" title="Nom de la classe, orientation (L=Light, D=Dark), score de base" class="h5 text-danger">Rocketeer (LD) ~ 32</h5>
-						    	</div>
-							</div>
-							<ul class="list-group list-group-flush">
-						    	<li class="list-group-item list-group-item-success">Min Stats : <strong class="text-danger" data-toggle="tooltip" data-placement="top" title="tableau associatif avec les étiquettes STR, DEX, CON, INT, PIE, LCK">&#36;array</strong></li>
-						    	<li class="list-group-item list-group-item-success">Max stats : <strong class="text-danger" data-toggle="tooltip" data-placement="top" title="tableau associatif avec les étiquettes STR, DEX, CON, INT, PIE, LCK">&#36;array</strong></li>
-						    	<li class="list-group-item list-group-item-success">Spells : <strong class="text-danger" data-toggle="tooltip" data-placement="top" title="liste des sorts. Idéalement quand on clique sur un sort, un modal s'affichera avec les infos du sort... ça dépasse l'entendement">&#36;array</strong></li>
-						    	<li class="list-group-item list-group-item-success">Techniques : <strong class="text-danger" data-toggle="tooltip" data-placement="top" title="liste des techniques de combats, doit préciser si est full screen technique (FST) ainsi que niveau (2 ou 3)">&#36;array</strong></li>
-						    	<li class="list-group-item list-group-item-success">Pros : <strong class="text-danger" data-toggle="tooltip" data-placement="top" title="avantages individuels de la classe, par ex. d'avoir le soin sur tous les alliés">&#36;text</strong></li>
-						    	<li class="list-group-item list-group-item-success">Cons : <strong class="text-danger" data-toggle="tooltip" data-placement="top" title="défauts individuels de la classe, par ex de manquer de bulk">&#36;text</strong></li>
-						    	<li class="list-group-item list-group-item-success">Affiliates : <strong class="text-danger" data-toggle="tooltip" data-placement="top" title="partenaires idéaux pour cette classe, ex un soigneur, un booster de stats, etc">&#36;text</strong></li>
-							</ul>
-						</div>
-						<div class="col-md-4 card">
-							<div class="card-header">
-								<div class="d-flex flex-column align-items-center">
-									<img src="http://www.videogamesprites.net/SeikenDensetsu3/NPCs/Elf%20(Front).gif" alt="victor" style="height:3.6rem;width:auto;">
-						    		<h4 class="h4 my-2 text-info">Alariel</h4>
-						    		<h5 class="h5 text-dark">High Elf (LL) ~ 42</h5>
-						    	</div>
-							</div>
-							<ul class="list-group list-group-flush">
-						    	<li class="list-group-item list-group-item-info">Min Stats : <strong>&#36;array</strong></li>
-						    	<li class="list-group-item list-group-item-info">Max stats : <strong>&#36;array</strong></li>
-						    	<li class="list-group-item list-group-item-info">Spells : <strong>&#36;array</strong></li>
-						    	<li class="list-group-item list-group-item-info">Techniques : <strong>&#36;array</strong></li>
-						    	<li class="list-group-item list-group-item-info">Pros : <strong>&#36;text</strong></li>
-						    	<li class="list-group-item list-group-item-info">Cons : <strong>&#36;text</strong></li>
-						    	<li class="list-group-item list-group-item-info">Affiliates : <strong>&#36;text</strong></li>
-							</ul>
-						</div>
-						<div class="col-md-4 card">
-							<div class="card-header">
-								<div class="d-flex flex-column align-items-center">
-									<img src="http://www.videogamesprites.net/SeikenDensetsu3/NPCs/Jose.gif" alt="victor" style="height:3.6rem;width:auto;">
-						    		<h4 class="h4 my-2 text-primary">Jim</h4>
-						    		<h5 class="h5 text-dark">Old Wolf (DD) ~ 38</h5>
-						    	</div>
-							</div>
-							<ul class="list-group list-group-flush">
-						    	<li class="list-group-item list-group-item-primary">Min Stats : <strong>&#36;array</strong></li>
-						    	<li class="list-group-item list-group-item-primary">Max stats : <strong>&#36;array</strong></li>
-						    	<li class="list-group-item list-group-item-primary">Spells : <strong>&#36;array</strong></li>
-						    	<li class="list-group-item list-group-item-primary">Techniques : <strong>&#36;array</strong></li>
-						    	<li class="list-group-item list-group-item-primary">Pros : <strong>&#36;text</strong></li>
-						    	<li class="list-group-item list-group-item-primary">Cons : <strong>&#36;text</strong></li>
-						    	<li class="list-group-item list-group-item-primary">Affiliates : <strong>&#36;text</strong></li>
-							</ul>
-						</div>
-					</div>
+          			<!-- ADD CHARACTER SECTION  -->
+			        <div class="row mt-3 list-group-item-warning">
+			            <form action="#" method="post" class="col-md-12">
+			            	<fieldset class="mt-3 form-group">
+			            		<?php
+			            			echo "<legend class='h4 text-dark text-center'>Create a character's final class ($nb_chara out of 24)</legend>";
+			            		?>
+			            		<label class="form-control" for="add_chara_id">Character id : </label>
+			            		<input type="number" placeholder="id between 0 and 23" class="form-control mb-3" id="add_chara_id" name="add_chara_id">
+			            		<label class="form-control" for="add_chara_name">Character name : </label>
+			            		<input type="text" placeholder="character name" class="form-control mb-3" id="add_chara_name" name="add_chara_name">
+			            		<label class="form-control" for="add_chara_class">Character Class : </label>
+			            		<input type="text" placeholder="character class" class="form-control mb-3" id="add_chara_class" name="add_chara_class">
+			            		<label class="form-control" for="add_chara_img">Character image : </label>
+			            		<input type="text" placeholder="character image link" class="form-control mb-3" id="add_chara_img" name="add_chara_img">
+			            		<input type="submit" name="add_chara_submit" value="Send" class="w-25 float-right form-control btn btn-success btn-sm mb-3" id="add_chara_submit">
+			            	</fieldset>
+			            </form>
+			            <?php
+			            	if (isset($_POST["add_chara_submit"]))
+			            	{
+			            		echo "<div class='col-md-12'><div class='alert alert-dark my-2'>$chara_submit</span></div></div>";
+			            	}
+			            ?>
+			        </div>
 
-          <!-- second section with focus result -->
+
+					<!-- first section with the three characters inside -->
+					<?php
+					if (StaticMethods::goGetNames() < 3)
+					{
+						echo '<div class="alert alert-danger">Error : Cannot reach three different characters';
+					}
+					else
+					{
+						for ($i=0; $i < 3 ; $i++)
+						{ 
+							echo $chara_toolbox->displayMyRootChara($i, $_SESSION['triad'][$i]);
+						}
+					}
+					?>
+
+          			<!-- second section with focus result -->
 					<div class="row">
 						<div class="col-md-12 list-group-item-light p-2">
 							<ul class="list-group">
@@ -243,11 +228,8 @@
 							</ul>
 						</div>
 					</div>
-        <?php else : ?>
-          <div class="row list-group-item-warning">
-            WOW
-          </div>
-        <?php endif ?>
+
+
 
 
 					<!-- third section with team details -->
@@ -328,19 +310,11 @@
 				<div class="my-5"></div>
 			</div>
 			<div class="my-2"></div>
-			<div class="row">
-				<div class="col-md-12">
-					<a class="text-danger float-right" style="font-size:1.1rem;" href="./4007_root.html"><span class="fas fa-table"></span></a>
-				</div>
-			</div>
+			
+			<!-- closing bottom margins -->
 			<div class="my-5"></div>
 			<div class="my-5"></div>
-
-		<script>
-			$(function () {
-				$('[data-toggle="tooltip"]').tooltip()
-			})
-		</script>
+		</div>
 
 		<!-- Bootstrap JS CDN -->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
