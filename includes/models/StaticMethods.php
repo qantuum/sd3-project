@@ -45,6 +45,25 @@ class StaticMethods
 		}
 	}
 
+	// associates a name and a variable
+	public static function buildName_i($string, $i)
+	{
+		return $string.$i;
+	}
+
+	// retruns true (1) if the specified strings matches array writing : "...", "...", "..."
+	/*static public function checksArray($string)
+	{
+		if ()
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}	*/
+
 	// chara gen related
 
 	// small function to return the right display color
@@ -84,25 +103,26 @@ class StaticMethods
 		else
 		{
 			$good_count = count($list)-1;
-			$chara_one=intval(rand(0,$good_count));
+
+			$chara_one=intval(rand(0, $good_count));
 			$chara_two=$chara_one;
 			// while a match is found between the two numbers'names, change number
 			while ($list[$chara_one][Constants::TABLE_SD3_CHARAS_NAME]==$list[$chara_two][Constants::TABLE_SD3_CHARAS_NAME])
 			{
-				$chara_two=intval(rand(0,$good_count));
+				$chara_two=intval(rand(0, $good_count));
 			}
+			
 			$chara_three=$chara_two;
 			// while a match is found between the three numbers'names, change number
 			while ($list[$chara_two][Constants::TABLE_SD3_CHARAS_NAME]==$list[$chara_three][Constants::TABLE_SD3_CHARAS_NAME] ||
-				$list[$chara_three][Constants::TABLE_SD3_CHARAS_NAME]==$list[$chara_one][Constants::TABLE_SD3_CHARAS_NAME] ||
-				$list[$chara_one][Constants::TABLE_SD3_CHARAS_NAME]==$list[$chara_two][Constants::TABLE_SD3_CHARAS_NAME])
+				$list[$chara_three][Constants::TABLE_SD3_CHARAS_NAME]==$list[$chara_one][Constants::TABLE_SD3_CHARAS_NAME])
 			{
-				$chara_three=intval(rand(0,$good_count));
+				$chara_three=intval(rand(0, $good_count));
 			}
 			// I successfully return a triad with no double character
-			$triad=array($chara_one, $chara_two, $chara_three);
+			$triad = array($chara_one, $chara_two, $chara_three);
 			return $triad;
 		}
-	}			
+	}		
 
 }

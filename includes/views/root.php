@@ -175,8 +175,9 @@
 
 				<!-- center panel with team results -->
 				<div class="col-lg-8">
-					<h3 class="h3 text-center list-group-item-light pb-2 text-secondary">Team edition panel </h3>
+					<h3 class="h3 text-center list-group-item-light pb-2 text-secondary">Team edition panel --- Please hover each form input to get info </h3>
 
+					<?php if ($nb_chara < 24) : ?>
           			<!-- ADD CHARACTER SECTION  -->
 			        <div class="row mt-3 list-group-item-warning">
 			            <form action="#" method="post" class="col-md-12">
@@ -202,17 +203,28 @@
 			            	}
 			            ?>
 			        </div>
+			    	<?php endif; ?>
 
 
 					<!-- first section with the three characters inside -->
 					<?php
-					if (StaticMethods::goGetNames() < 3)
+					if (!isset($_SESSION['triad']) || StaticMethods::goGetNames() < count($_SESSION['triad']))
 					{
-						echo '<div class="alert alert-danger">Error : Cannot reach three different characters';
+						echo '<div class="row"><div class="col-lg-12"><div class="alert alert-danger">Error : Cannot reach three different characters or session uninitialized</div></div></div>';
 					}
 					else
 					{
-						for ($i=0; $i < 3 ; $i++)
+						// display error alert before all characters edit panels
+						for ($i=0; $i < count($_SESSION['triad']) ; $i++)
+						{
+							if (isset($_POST[StaticMethods::buildName_i("chara_update_submit", $i)]))
+							{
+								echo "<div class='row'><div class='col-md-12'><div class='alert alert-dark my-2'>$chara_update</span></div></div></div>";
+							}
+						}
+
+						// display each character edit panel
+						for ($i=0; $i < count($_SESSION['triad']) ; $i++)
 						{ 
 							echo $chara_toolbox->displayMyRootChara($i, $_SESSION['triad'][$i]);
 						}

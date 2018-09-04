@@ -109,6 +109,7 @@ class CharaTable
 		$res = $database->select(Constants::TABLE_SD3_CHARAS, [
 			Constants::TABLE_SD3_CHARAS_ID,
 			Constants::TABLE_SD3_CHARAS_NAME
+		], ["ORDER" => Constants::TABLE_SD3_CHARAS_ID
 		]);
 		return $res;
 	}
@@ -120,30 +121,6 @@ class CharaTable
 		return $res ;
 	}
 
-	function displayMyChara($i)
-	{
-		return "
-		<div class='col-md-4 card'>
-			<div class='card-header'>
-				<div class='d-flex flex-column align-items-center'>
-					<img src='http://www.videogamesprites.net/SeikenDensetsu3/NPCs/Victor.gif' alt='victor' style='height:3.6rem;width:auto;'>
-			   		<h4 class='h4 my-2 text-danger' data-toggle='tooltip' data-placement='top' title='Nom de mon héros'>Victor</h4>
-			   		<h5 data-toggle='tooltip' data-placement='top' title='Nom de la classe, orientation (L=Light, D=Dark), score de base' class='h5 text-danger'>Rocketeer (LD) ~ 32</h5>
-			   	</div>
-			</div>
-			<ul class='list-group list-group-flush'>
-			   	<li class='list-group-item list-group-item-success'>Min Stats : <strong class='text-danger' data-toggle='tooltip' data-placement='top' title='tableau associatif avec les étiquettes STR, DEX, CON, INT, PIE, LCK'>&#36;array</strong></li>
-			   	<li class='list-group-item list-group-item-success'>Max stats : <strong class='text-danger' data-toggle='tooltip' data-placement='top' title='tableau associatif avec les étiquettes STR, DEX, CON, INT, PIE, LCK'>&#36;array</strong></li>
-			   	<li class='list-group-item list-group-item-success'>Spells : <strong class='text-danger' data-toggle='tooltip' data-placement='top' title='liste des sorts. Idéalement quand on clique sur un sort, un modal s'affichera avec les infos du sort... ça dépasse l'entendement'>&#36;array</strong></li>
-			   	<li class='list-group-item list-group-item-success'>Techniques : <strong class='text-danger' data-toggle='tooltip' data-placement='top' title='liste des techniques de combats, doit préciser si est full screen technique (FST) ainsi que niveau (2 ou 3)'>&#36;array</strong></li>
-			   	<li class='list-group-item list-group-item-success'>Pros : <strong class='text-danger' data-toggle='tooltip' data-placement='top' title='avantages individuels de la classe, par ex. d'avoir le soin sur tous les alliés'>&#36;text</strong></li>
-			   	<li class='list-group-item list-group-item-success'>Cons : <strong class='text-danger' data-toggle='tooltip' data-placement='top' title='défauts individuels de la classe, par ex de manquer de bulk'>&#36;text</strong></li>
-			   	<li class='list-group-item list-group-item-success'>Affiliates : <strong class='text-danger' data-toggle='tooltip' data-placement='top' title='partenaires idéaux pour cette classe, ex un soigneur, un booster de stats, etc'>&#36;text</strong></li>
-			</ul>
-		</div>
-		";
-	}
-
 	function displayMyRootChara($i, $id)
 	{
 		global $database;
@@ -152,24 +129,64 @@ class CharaTable
 		return "
 		<div class='row'>
 			<div class='col-md-12 card'>
-				<div class='card-header'>
-					<div class='d-flex flex-column align-items-center'>
-						<img src='./img/".$res[Constants::TABLE_SD3_CHARAS_IMG]."' alt='".$res[Constants::TABLE_SD3_CHARAS_CLASS]."' style='height:3.6rem;width:auto;'>
-				   		<h4 class='h4 my-2 text-".$color."' data-toggle='tooltip' data-placement='top' title='My hero's name>".$res[Constants::TABLE_SD3_CHARAS_NAME]."</h4>
-				   		<h5 data-toggle='tooltip' data-placement='top' title='My class, with its designation (L=Light, D=Dark), Apolaris82's score' class='h5 text-".$color."'>".$res[Constants::TABLE_SD3_CHARAS_CLASS]." (".$res[Constants::TABLE_SD3_CHARAS_LIGHT_DARK].") ~ ".$res[Constants::TABLE_SD3_CHARAS_SCORE]."</h5>
-				   	</div>
+				<div class='card-header list-group-item-".$color."'>
+					<form action='#' method='post' class='form-group'>
+						<img src='./img/".$res[Constants::TABLE_SD3_CHARAS_IMG]."' alt='".$res[Constants::TABLE_SD3_CHARAS_CLASS]."' class='form-control' style='height:5rem;width:auto;border:0.10rem double lightgray;'>
+						<label for='chara_update_id".$i."'>Id : </label>
+						<input class='form-control' type='number' disabled id='chara_update_id".$i."' name = 'chara_update_id".$i."' value = ".$res[Constants::TABLE_SD3_CHARAS_ID]." data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s class line id --- no update allowed'>
+				   		<label for='chara_update_name".$i."'>Name : </label>
+				   		<input class='form-control' type='text' disabled id='chara_update_name".$i."' name = 'chara_update_name".$i."' value = ".$res[Constants::TABLE_SD3_CHARAS_NAME]." data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s name --- no update allowed'>
+				   		<label for='chara_update_class".$i."'>Class : </label>
+				   		<input class='form-control' type='text' disabled id='chara_update_class".$i."' name = 'chara_update_class".$i."' value = ".$res[Constants::TABLE_SD3_CHARAS_CLASS]." data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s class --- no update allowed'>
+				   		<label for='chara_update_img".$i."'>Img Path : </label>
+				   		<input class='form-control' type='text' disabled id='chara_update_img".$i."' name = 'chara_update_img".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_IMG]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s image src path --- no update allowed'>
+				   		<label for='chara_update_min_stats".$i."'>Minimum stats : </label>
+				   		<input class='form-control' type='text' id='chara_update_min_stats".$i."' name = 'chara_update_min_stats".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_MIN_STATS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s minimum stats : please enter 6 numbers between 10 and 25, simply separated by a comma : ,'>
+				   		<label for='chara_update_max_stats".$i."'>Maximum stats : </label>
+				   		<input class='form-control' type='text' id='chara_update_max_stats".$i."' name = 'chara_update_max_stats".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_MAX_STATS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s maximum stats : please enter 6 numbers between 10 and 25, simply separated by a comma : ,'>
+				   		<label for='chara_update_spells".$i."'>Spells : </label>
+				   		<input class='form-control' type='text' id='chara_update_spells".$i."' name = 'chara_update_spells".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_SPELLS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s maximum stats : please enter your number of spells (plain text), simply separated by a comma : ,'>
+				   		<label for='chara_update_techs".$i."'>Fighting techniques : </label>
+				   		<input class='form-control' type='text' id='chara_update_techs".$i."' name = 'chara_update_techs".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_TECHS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s fighting techniques : please enter your number of techs (text and allowed punctuation characters), simply separated by a comma : ,'>
+				   		<label for='chara_update_pros".$i."'>Pros : </label>
+				   		<input class='form-control' type='text' id='chara_update_pros".$i."' name = 'chara_update_pros".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_PROS]."' data-toggle='tooltip' data-placement='top' title='Good points of this class !'>
+				   		<label for='chara_update_cons".$i."'>Pros : </label>
+				   		<input class='form-control' type='text' id='chara_update_cons".$i."' name = 'chara_update_cons".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_CONS]."' data-toggle='tooltip' data-placement='top' title='Poor points of this class !'>
+				   		<label for='chara_update_affiliates".$i."'>Pros : </label>
+				   		<input class='form-control' type='text' id='chara_update_afiliates".$i."' name = 'chara_update_affiliates".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_AFFILIATES]."' data-toggle='tooltip' data-placement='top' title='Good teammates to play !'>
+				   		<input class='form-control w-25 float-right my-5 btn btn-sm btn-".$color."' type='submit' id='chara_update_submit".$i."' name = 'chara_update_submit".$i."' value = 'Send' data-toggle='tooltip' data-placement='top' title='Validate update character form'>
+				   	</form>
 				</div>
-				<ul class='list-group list-group-flush'>
-				   	<li class='list-group-item list-group-item-".$color."'>Min Stats : <span data-toggle='tooltip' data-placement='top' title='All min stats'>".$res[Constants::TABLE_SD3_CHARAS_MIN_STATS]."</span></li>
-				   	<li class='list-group-item list-group-item-".$color."'>Max stats : <span data-toggle='tooltip' data-placement='top' title='All max stats'>".$res[Constants::TABLE_SD3_CHARAS_MAX_STATS]."</li>
-				   	<li class='list-group-item list-group-item-".$color."'>Spells : <span  data-toggle='tooltip' data-placement='top' title='Spells list'>".$res[Constants::TABLE_SD3_CHARAS_SPELLS]."</span></li>
-				   	<li class='list-group-item list-group-item-".$color."'>Techniques : <span data-toggle='tooltip' data-placement='top' title='Fighting techniques list'>".$res[Constants::TABLE_SD3_CHARAS_TECHS]."</span></li>
-				   	<li class='list-group-item list-group-item-".$color."'>Pros : <span data-toggle='tooltip' data-placement='top' title='Good points about this class'>".$res[Constants::TABLE_SD3_CHARAS_PROS]."</span></li>
-				   	<li class='list-group-item list-group-item-".$color."'>Cons : <span data-toggle='tooltip' data-placement='top' title='Poor points about this class'>".$res[Constants::TABLE_SD3_CHARAS_CONS]."</span></li>
-				   	<li class='list-group-item list-group-item-".$color."'>Affiliates : <span data-toggle='tooltip' data-placement='top' title='Ideal team partners that can improve this class' skills>".$res[Constants::TABLE_SD3_CHARAS_AFFILIATES]."</strong></li>
-				</ul>
 			</div>
 		</div>
 		";
+	}
+
+	function displayMyChara($i, $id)
+	{
+		global $database;
+		$res = $this->get_chara_allinfo_by_id($id);
+		$color=StaticMethods::chooseMyColor($i);
+		return "
+		<div class='col-md-12 card'>
+			<div class='card-header'>
+				<div class='d-flex flex-column align-items-center'>
+					<img src='./img/".$res[Constants::TABLE_SD3_CHARAS_IMG]."' alt='".$res[Constants::TABLE_SD3_CHARAS_CLASS]."' style='height:3.6rem;width:auto;'>
+			   		<h4 class='h4 my-2 text-".$color."' data-toggle='tooltip' data-placement='top' title='My hero's name>".$res[Constants::TABLE_SD3_CHARAS_NAME]."</h4>
+			   		<h5 data-toggle='tooltip' data-placement='top' title='My class, with its designation (L=Light, D=Dark), Apolaris82's score' class='h5 text-".$color."'>".$res[Constants::TABLE_SD3_CHARAS_CLASS]." (".$res[Constants::TABLE_SD3_CHARAS_LIGHT_DARK].") ~ ".$res[Constants::TABLE_SD3_CHARAS_SCORE]."</h5>
+			   	</div>
+			</div>
+			<ul class='list-group list-group-flush'>
+			   	<li class='list-group-item list-group-item-".$color."'>Min Stats : <span data-toggle='tooltip' data-placement='top' title='All min stats'>".$res[Constants::TABLE_SD3_CHARAS_MIN_STATS]."</span></li>
+			   	<li class='list-group-item list-group-item-".$color."'>Max stats : <span data-toggle='tooltip' data-placement='top' title='All max stats'>".$res[Constants::TABLE_SD3_CHARAS_MAX_STATS]."</li>
+			   	<li class='list-group-item list-group-item-".$color."'>Spells : <span  data-toggle='tooltip' data-placement='top' title='Spells list'>".$res[Constants::TABLE_SD3_CHARAS_SPELLS]."</span></li>
+			   	<li class='list-group-item list-group-item-".$color."'>Techniques : <span data-toggle='tooltip' data-placement='top' title='Fighting techniques list'>".$res[Constants::TABLE_SD3_CHARAS_TECHS]."</span></li>
+			   	<li class='list-group-item list-group-item-".$color."'>Pros : <span data-toggle='tooltip' data-placement='top' title='Good points about this class'>".$res[Constants::TABLE_SD3_CHARAS_PROS]."</span></li>
+			   	<li class='list-group-item list-group-item-".$color."'>Cons : <span data-toggle='tooltip' data-placement='top' title='Poor points about this class'>".$res[Constants::TABLE_SD3_CHARAS_CONS]."</span></li>
+			   	<li class='list-group-item list-group-item-".$color."'>Affiliates : <span data-toggle='tooltip' data-placement='top' title='Ideal team partners that can improve this class' skills>".$res[Constants::TABLE_SD3_CHARAS_AFFILIATES]."</strong></li>
+			</ul>
+		</div>
+	</div>
+	";
 	}
 }
