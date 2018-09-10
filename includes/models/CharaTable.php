@@ -13,29 +13,29 @@ class CharaTable
 			Constants::TABLE_SD3_CHARAS_NAME => $name,
 			Constants::TABLE_SD3_CHARAS_CLASS => $class,
 			Constants::TABLE_SD3_CHARAS_IMG => $img,
-			Constants::TABLE_SD3_CHARAS_LIGHT_DARK => " ",
+			Constants::TABLE_SD3_CHARAS_LIGHT_DARK => "x",
 			Constants::TABLE_SD3_CHARAS_SCORE => 0,
-			Constants::TABLE_SD3_CHARAS_MIN_STATS => json_encode(array(" ")),
-			Constants::TABLE_SD3_CHARAS_MAX_STATS => json_encode(array(" ")),
-			Constants::TABLE_SD3_CHARAS_SPELLS => json_encode(array(" ")),
-			Constants::TABLE_SD3_CHARAS_TECHS => json_encode(array(" ")),
-			Constants::TABLE_SD3_CHARAS_PROS => " ",
-			Constants::TABLE_SD3_CHARAS_CONS => " ",
-			Constants::TABLE_SD3_CHARAS_AFFILIATES => " "
+			Constants::TABLE_SD3_CHARAS_MIN_STATS => json_encode(array("x")),
+			Constants::TABLE_SD3_CHARAS_MAX_STATS => json_encode(array("x")),
+			Constants::TABLE_SD3_CHARAS_SPELLS => json_encode(array("x")),
+			Constants::TABLE_SD3_CHARAS_TECHS => json_encode(array("x")),
+			Constants::TABLE_SD3_CHARAS_PROS => "x",
+			Constants::TABLE_SD3_CHARAS_CONS => "x",
+			Constants::TABLE_SD3_CHARAS_AFFILIATES => "x"
 		]);
 		$id = $database->id();
 	}
 
-	function set_chara_details ($id, $light_dark, $score, array $min_stats, array $max_stats, array $spells, array $techs, $pros, $cons, $affiliates)
+	function set_chara_details ($id, $light_dark, $score, $min_stats, $max_stats, $spells, $techs, $pros, $cons, $affiliates)
 	{
 		global $database;
 		$res = $database->update(Constants::TABLE_SD3_CHARAS, [
 			Constants::TABLE_SD3_CHARAS_LIGHT_DARK => $light_dark,
 			Constants::TABLE_SD3_CHARAS_SCORE => $score,
-			Constants::TABLE_SD3_CHARAS_MIN_STATS => json_encode($min_stats),
-			Constants::TABLE_SD3_CHARAS_MAX_STATS => json_encode($max_stats),
-			Constants::TABLE_SD3_CHARAS_SPELLS => json_encode($spells),
-			Constants::TABLE_SD3_CHARAS_TECHS => json_encode($techs),
+			Constants::TABLE_SD3_CHARAS_MIN_STATS => json_encode(explode(", ", $min_stats)),
+			Constants::TABLE_SD3_CHARAS_MAX_STATS => json_encode(explode(", ", $max_stats)),
+			Constants::TABLE_SD3_CHARAS_SPELLS => json_encode(explode(", ", $spells)),
+			Constants::TABLE_SD3_CHARAS_TECHS => json_encode(explode(", ", $techs)),
 			Constants::TABLE_SD3_CHARAS_PROS => $pros,
 			Constants::TABLE_SD3_CHARAS_CONS => $cons,
 			Constants::TABLE_SD3_CHARAS_AFFILIATES => $affiliates
@@ -75,6 +75,17 @@ class CharaTable
 			$line[Constants::TABLE_SD3_CHARAS_TECHS] = implode(", ", json_decode($line[Constants::TABLE_SD3_CHARAS_TECHS], true));
 		}
 		return $data ;
+	}
+
+	function get_chara_score_by_id($id)
+	{
+		global $database;
+		$data = $database->get(Constants::TABLE_SD3_CHARAS, [
+			Constants::TABLE_SD3_CHARAS_SCORE
+		], [
+			Constants::TABLE_SD3_CHARAS_ID => $id
+		] );
+		return implode('', $data);
 	}
 
 	function get_chara_details_by_id($id)
@@ -140,19 +151,23 @@ class CharaTable
 				   		<input class='form-control' type='text' disabled id='chara_update_class".$i."' name = 'chara_update_class".$i."' value = ".$res[Constants::TABLE_SD3_CHARAS_CLASS]." data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s class --- no update allowed'>
 				   		<label for='chara_update_img".$i."'>Img Path : </label>
 				   		<input class='form-control' type='text' disabled id='chara_update_img".$i."' name = 'chara_update_img".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_IMG]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s image src path --- no update allowed'>
+				   		<label for='chara_update_light_dark".$i."'>Light/Dark : </label>
+				   		<input class='form-control' type='text' id='chara_update_light_dark".$i."' name = 'chara_update_light_dark".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_LIGHT_DARK]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s alignment, L=light, D=dark, please register 2nd class : LL, LD, DL or DD'>
+				   		<label for='chara_update_score".$i."'>Apolaris82's score : </label>
+				   		<input class='form-control' type='number' id='chara_update_score".$i."' name = 'chara_update_score".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_SCORE]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s score, the highest value, the more magical focus'>
 				   		<label for='chara_update_min_stats".$i."'>Minimum stats : </label>
 				   		<input class='form-control' type='text' id='chara_update_min_stats".$i."' name = 'chara_update_min_stats".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_MIN_STATS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s minimum stats : please enter 6 numbers between 10 and 25, simply separated by a comma : ,'>
 				   		<label for='chara_update_max_stats".$i."'>Maximum stats : </label>
-				   		<input class='form-control' type='text' id='chara_update_max_stats".$i."' name = 'chara_update_max_stats".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_MAX_STATS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s maximum stats : please enter 6 numbers between 10 and 25, simply separated by a comma : ,'>
+				   		<input class='form-control' type='text' id='chara_update_max_stats".$i."' name = 'chara_update_max_stats".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_MAX_STATS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s maximum stats : please enter 6 numbers between 10 and 25, simply separated by a comma and space :, '>
 				   		<label for='chara_update_spells".$i."'>Spells : </label>
-				   		<input class='form-control' type='text' id='chara_update_spells".$i."' name = 'chara_update_spells".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_SPELLS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s maximum stats : please enter your number of spells (plain text), simply separated by a comma : ,'>
+				   		<input class='form-control' type='text' id='chara_update_spells".$i."' name = 'chara_update_spells".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_SPELLS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s maximum stats : please enter your number of spells (plain text), simply separated by a comma and space:, --- spells must mention if it is single target (ST) or multi target (MT)'>
 				   		<label for='chara_update_techs".$i."'>Fighting techniques : </label>
-				   		<input class='form-control' type='text' id='chara_update_techs".$i."' name = 'chara_update_techs".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_TECHS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s fighting techniques : please enter your number of techs (text and allowed punctuation characters), simply separated by a comma : ,'>
+				   		<input class='form-control' type='text' id='chara_update_techs".$i."' name = 'chara_update_techs".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_TECHS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s fighting techniques : please enter your number of techs (text and allowed punctuation characters), simply separated by a comma and space:, --- fighting techniques must mention if they are Full Screen (FST) and also the class power (/, + or ++)'>
 				   		<label for='chara_update_pros".$i."'>Pros : </label>
 				   		<input class='form-control' type='text' id='chara_update_pros".$i."' name = 'chara_update_pros".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_PROS]."' data-toggle='tooltip' data-placement='top' title='Good points of this class !'>
-				   		<label for='chara_update_cons".$i."'>Pros : </label>
+				   		<label for='chara_update_cons".$i."'>Cons : </label>
 				   		<input class='form-control' type='text' id='chara_update_cons".$i."' name = 'chara_update_cons".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_CONS]."' data-toggle='tooltip' data-placement='top' title='Poor points of this class !'>
-				   		<label for='chara_update_affiliates".$i."'>Pros : </label>
+				   		<label for='chara_update_affiliates".$i."'>Affiliates : </label>
 				   		<input class='form-control' type='text' id='chara_update_afiliates".$i."' name = 'chara_update_affiliates".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_AFFILIATES]."' data-toggle='tooltip' data-placement='top' title='Good teammates to play !'>
 				   		<input class='form-control w-25 float-right my-5 btn btn-sm btn-".$color."' type='submit' id='chara_update_submit".$i."' name = 'chara_update_submit".$i."' value = 'Send' data-toggle='tooltip' data-placement='top' title='Validate update character form'>
 				   	</form>

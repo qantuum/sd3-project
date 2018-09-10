@@ -8,7 +8,19 @@ class StaticMethods
 	// returns true (1) if I have a text string including letters, punctuation and spaces of the specified length
 	static public function checksAz($string, $length)
 	{
-		if (preg_match('#^([[:alpha:][:punct:][:space:]]){'.$length.'}$#', $string) && isset($string))
+		if (preg_match('#^([[:alpha:][:space:]\.\/]){'.$length.'}$#', $string) && isset($string))
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	static public function checksText($string)
+	{
+		if (preg_match('#^([[:alpha:][:space:]\'\"\(\)\[\]\-\,\;\:\!\?])+$#', $string) && isset($string))
 		{
 			return 1;
 		}
@@ -32,10 +44,62 @@ class StaticMethods
 		return $count;
 	}
 
+	static public function checksStats($string)
+	{
+		if (preg_match('#^([0-2][0-9],\ ){5}([0-2][0-9])$#', $string) && isset($string))
+		{
+			return 1;
+		}
+
+		else
+		{
+			return 0;
+		}
+	}
+
+	static public function checksSpells($string)
+	{
+		if (preg_match('#^(([[:alnum:][:space:]\-\(\)])+,\ )+[[:alnum:][:space:]\-\(\)]+$#', $string) && isset($string))
+		{
+			return 1;
+		}
+
+		else
+		{
+			return 0;
+		}
+	}
+
+	static public function checksTechs($string)
+	{
+		if (preg_match('#^(([[:alpha:][:space:]\+\-])+,\ )+[[:alnum:][:space:]\+\-]+$#', $string) && isset($string))
+		{
+			return 1;
+		}
+
+		else
+		{
+			return 0;
+		}
+	}
+
+	static public function checksLightDark($string)
+	{
+		if (preg_match('#^(L|D){2}$#', $string) && isset($string))
+		{
+			return 1;
+		}
+
+		else
+		{
+			return 0;
+		}
+	}
+
 	// returns true (1) if the specified number fits in the range
 	static public function checksNumber($field, $min, $max)
 	{
-		if (($field>=$min || $field<$max) && isset($field))
+		if (($field>=$min && $field<$max) && isset($field) && preg_match('#^[0-9]{1,2}$#', $field))
 		{
 			return 1;
 		}

@@ -214,10 +214,16 @@
 					}
 					else
 					{
+						// display alert regarding team
+						if(isset($_POST['add_team_submit']))
+						{
+							echo "<div class='row'><div class='col-md-12'><div class='alert alert-dark my-2'>$team_submit</span></div></div></div>";
+						}
+
 						// display error alert before all characters edit panels
 						for ($i=0; $i < count($_SESSION['triad']) ; $i++)
 						{
-							if (isset($_POST[StaticMethods::buildName_i("chara_update_submit", $i)]))
+							if (isset($_POST[StaticMethods::buildName_i("chara_update_submit", $i)]) && !empty($chara_update))
 							{
 								echo "<div class='row'><div class='col-md-12'><div class='alert alert-dark my-2'>$chara_update</span></div></div></div>";
 							}
@@ -231,6 +237,14 @@
 					}
 					?>
 
+					<?php
+					for ($i=0; $i< count($_SESSION['triad']); $i++)
+					{
+
+					}
+					if($team_toolbox->find_team(implode($_SESSION['team_sorted'])) == 0) :
+						echo $team_toolbox->rootTeamBirthForm(implode('', $_SESSION['team_sorted']));
+					else : ?>
           			<!-- second section with focus result -->
 					<div class="row">
 						<div class="col-md-12 list-group-item-light p-2">
@@ -240,6 +254,7 @@
 							</ul>
 						</div>
 					</div>
+					<?php endif; ?>
 
 
 

@@ -5,20 +5,30 @@ include_once __DIR__."/../define_database.php" ;
 class TeamsTable
 {
 
-  function init_empty_team(array $arrayids, $score1, $score2, $score3)
+  function init_empty_team($team_mix, $score1, $score2, $score3)
   {
     global $database;
     $res = $database->insert(Constants::TABLE_SD3_TEAMS, [
-			Constants::TABLE_SD3_TEAMS_TRIAD => implode('', $arrayids),
+			Constants::TABLE_SD3_TEAMS_TRIAD => $team_mix,
 			Constants::TABLE_SD3_TEAMS_BASE_SCORE => $score1 + $score2 + $score3,
       Constants::TABLE_SD3_TEAMS_FINAL_SCORE => 0,
-			Constants::TABLE_SD3_TEAM_PROS => " ",
-			Constants::TABLE_SD3_TEAMS_CONS => " ",
-			Constants::TABLE_SD3_TEAMS_QUEST => " ",
-      Constants::TABLE_SD3_TEAMS_BETTER => " ",
+			Constants::TABLE_SD3_TEAMS_PROS => "x",
+			Constants::TABLE_SD3_TEAMS_CONS => "x",
+			Constants::TABLE_SD3_TEAMS_QUEST => "x",
+      Constants::TABLE_SD3_TEAMS_BETTER => "x",
       Constants::TABLE_SD3_TEAMS_HAS_SPELL => 0
 		]);
-		$id = get_database()->id();
+		$id = $database->id();
+    return $id;
+  }
+
+  function find_team($team_mix)
+  {
+    global $database;
+    $res = $database->count(Constants::TABLE_SD3_TEAMS, "*", [
+      Constants::TABLE_SD3_TEAMS_TRIAD => $team_mix
+    ]) ;
+    return $res ;
   }
 
   function update_final_score($triad)
@@ -30,6 +40,20 @@ class TeamsTable
   function comments_spells($triad)
   {
     // here to take the spells in the team from the HAS SPELL big int
+  }
+
+  function rootTeamBirthForm($id_mix)
+  {
+    return '
+          <div class="row my-3">
+            <div class="col-md-12">
+              <form action="#" method="post" class="form-group">
+                <label for="add_team_submit" class="h3 text-center list-group-item-light pb-2 text-secondary">Save team to db</label>
+                <input id="add_team_submit" name="add_team_submit" class="form-control btn btn-lg btn-primary" type="submit" value="Save team : '.$id_mix.'">
+              </form>
+            </div>
+          </div>
+    ';
   }
 
   /*Add up your totals for the 3 classes in your party first.

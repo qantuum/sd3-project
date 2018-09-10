@@ -62,16 +62,17 @@ class TargetSpells {
 	// sabers
 	const ELEM_SABERS_ST = "ST elemental sabers";
 	const ELEM_SABERS_MT = "MT elemental sabers";
-	const SABER_S = "saint saber ST";
-	const SABER_D = "dark saber ST";
-	const SABER_T = "tree saber ST";
-	const SABER_M = "moon saber ST";
+	const SABER_S = "saint saber";
+	const SABER_D = "dark saber";
+	const SABER_T = "tree saber";
+	const SABER_M = "moon saber";
 	// stat magic
 	const STATS_UP_ST = "ST stats up";
 	const STATS_UP_MT = "MT stats up";
 	const STATS_DWN_ST = "ST stats down";
 	const STATS_DWN_MT = "MT stats down";
 	// various
+	const BLACK_CURSE = "black curse";
 	const DEMON_BREATH = "demon breath";
 	const AURA_WAVE = "aura wave";
 	// Jutsus
