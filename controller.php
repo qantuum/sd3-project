@@ -27,7 +27,7 @@ if (isset($_POST["submitAllRandom"]))
 	sort($_SESSION['team_sorted']);
 }
 
-// treatments performed when click "submit characted" in root panel
+// treatments performed when click "submit character" in root panel
 if (isset($_POST["add_chara_submit"]))
 {
 	$_SESSION["triad"] = StaticMethods::randomizeTeam();

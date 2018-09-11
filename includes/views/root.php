@@ -210,7 +210,7 @@
 					<?php
 					if (!isset($_SESSION['triad']) || StaticMethods::goGetNames() < count($_SESSION['triad']))
 					{
-						echo '<div class="row"><div class="col-lg-12"><div class="alert alert-danger">Error : Cannot reach three different characters or session uninitialized</div></div></div>';
+						echo '<div class="row"><div class="col-lg-12"><div class="alert alert-danger">Error : Cannot reach three different characters or session uninitialized --- click "Randmize!" or "Send!" to start a team. </div></div></div>';
 					}
 					else
 					{
@@ -238,23 +238,22 @@
 					?>
 
 					<?php
-					for ($i=0; $i< count($_SESSION['triad']); $i++)
+					if (isset($_SESSION['team_sorted']))
 					{
-
-					}
-					if($team_toolbox->find_team(implode($_SESSION['team_sorted'])) == 0) :
-						echo $team_toolbox->rootTeamBirthForm(implode('', $_SESSION['team_sorted']));
-					else : ?>
-          			<!-- second section with focus result -->
-					<div class="row">
-						<div class="col-md-12 list-group-item-light p-2">
-							<ul class="list-group">
-								<li class="list-group-item">Team score : <strong class="text-danger" data-toggle="tooltip" data-placement="top" title="score de base : addition des trois scores personnages">&#36;score</strong> ~ Final score : <strong class="text-danger" data-toggle="tooltip" data-placement="top" title="score final après calcul">&#36;final_score</strong></li>
-								<li class="list-group-item">We have a <strong class="text-danger" data-toggle="tooltip" data-placement="top" title="plus le score final est bas, plus le focus est 'melee', inversement pour 'magic' - je ne sais pas à quel limite ça change...">&#36;type</strong> focus over here.</li>
-							</ul>
+						if($team_toolbox->find_team(implode($_SESSION['team_sorted'])) == 0) :
+							echo $team_toolbox->rootTeamBirthForm(implode('', $_SESSION['team_sorted']));
+						else : ?>
+	          			<!-- second section with focus result -->
+						<div class="row">
+							<div class="col-md-12 list-group-item-light p-2">
+								<ul class="list-group">
+									<li class="list-group-item">Team score : <strong class="text-danger" data-toggle="tooltip" data-placement="top" title="score de base : addition des trois scores personnages">&#36;score</strong> ~ Final score : <strong class="text-danger" data-toggle="tooltip" data-placement="top" title="score final après calcul">&#36;final_score</strong></li>
+									<li class="list-group-item">We have a <strong class="text-danger" data-toggle="tooltip" data-placement="top" title="plus le score final est bas, plus le focus est 'melee', inversement pour 'magic' - je ne sais pas à quel limite ça change...">&#36;type</strong> focus over here.</li>
+								</ul>
+							</div>
 						</div>
-					</div>
-					<?php endif; ?>
+						<?php endif; 
+					} ?>
 
 
 

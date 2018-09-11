@@ -31,7 +31,7 @@ class StaticMethods
 	}
 
 	// returns the number of empty fields located in an array (will be used with $_POST in various situations)
-	static public function checksEmpty($array)
+	static public function checksEmpty(array $array)
 	{
 		$count = 0;
 		foreach ($array as $key => $value)
@@ -114,19 +114,6 @@ class StaticMethods
 	{
 		return $string.$i;
 	}
-
-	// retruns true (1) if the specified strings matches array writing : "...", "...", "..."
-	/*static public function checksArray($string)
-	{
-		if ()
-		{
-			return 1;
-		}
-		else
-		{
-			return 0;
-		}
-	}	*/
 
 	// chara gen related
 
