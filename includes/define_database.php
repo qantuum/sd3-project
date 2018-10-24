@@ -2,7 +2,7 @@
 
 //importing db credentials and medoo framework
 require  __DIR__."/Medoo-master/src/Medoo.php" ;
-require __DIR__."/../../credentials.php" ;
+require __DIR__."/../../../htdocs_credentials/sd3-project-credentials.php" ;
 
 
 // Using Medoo namespace
