@@ -2,7 +2,7 @@
 
 include_once __DIR__."/../define_database.php" ;
 
-class CharaTable
+class Characters
 {
 
 	function add_chara_simple($id, $name, $class, $img)
@@ -15,10 +15,11 @@ class CharaTable
 			Constants::TABLE_SD3_CHARAS_IMG => $img,
 			Constants::TABLE_SD3_CHARAS_LIGHT_DARK => "x",
 			Constants::TABLE_SD3_CHARAS_SCORE => 0,
-			Constants::TABLE_SD3_CHARAS_MIN_STATS => json_encode(array("x")),
-			Constants::TABLE_SD3_CHARAS_MAX_STATS => json_encode(array("x")),
-			Constants::TABLE_SD3_CHARAS_SPELLS => json_encode(array("x")),
-			Constants::TABLE_SD3_CHARAS_TECHS => json_encode(array("x")),
+			Constants::TABLE_SD3_CHARAS_MIN_STATS => 0,
+			Constants::TABLE_SD3_CHARAS_MAX_STATS => 0,
+			Constants::TABLE_SD3_CHARAS_SPELL_STATS => 0,
+			Constants::TABLE_SD3_CHARAS_SPELLS => "x",
+			Constants::TABLE_SD3_CHARAS_TECHS => "x",
 			Constants::TABLE_SD3_CHARAS_PROS => "x",
 			Constants::TABLE_SD3_CHARAS_CONS => "x",
 			Constants::TABLE_SD3_CHARAS_AFFILIATES => "x"
@@ -137,7 +138,9 @@ class CharaTable
 				   		<label for='chara_update_min_stats".$i."'>Minimum stats : </label>
 				   		<input class='form-control' type='text' id='chara_update_min_stats".$i."' name = 'chara_update_min_stats".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_MIN_STATS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s minimum stats : please enter 6 numbers between 10 and 25, simply separated by a comma : ,'>
 				   		<label for='chara_update_max_stats".$i."'>Maximum stats : </label>
-				   		<input class='form-control' type='text' id='chara_update_max_stats".$i."' name = 'chara_update_max_stats".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_MAX_STATS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s maximum stats : please enter 6 numbers between 10 and 25, simply separated by a comma and space :, '>
+						<input class='form-control' type='text' id='chara_update_max_stats".$i."' name = 'chara_update_max_stats".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_MAX_STATS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s maximum stats : please enter 6 numbers between 10 and 25, simply separated by a comma and space :, '>
+						<label for='chara_update_spell_stats".$i."'>All spells stats : </label>
+				   		<input class='form-control' type='text' id='chara_update_spell_stats".$i."' name = 'chara_update_spell_stats".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_SPELL_STATS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s minimum stats required to learn the entire roster of spells : please enter 6 numbers between 10 and 25, simply separated by a comma and space :, '>
 				   		<label for='chara_update_spells".$i."'>Spells : </label>
 				   		<input class='form-control' type='text' id='chara_update_spells".$i."' name = 'chara_update_spells".$i."' value = '".$res[Constants::TABLE_SD3_CHARAS_SPELLS]."' data-toggle='tooltip' data-placement='top' title='My hero&rsquo;s maximum stats : please enter your number of spells (plain text), simply separated by a comma and space:, --- spells must mention if it is single target (ST) or multi target (MT)'>
 				   		<label for='chara_update_techs".$i."'>Fighting techniques : </label>

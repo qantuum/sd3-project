@@ -3,13 +3,13 @@ session_start();
 // will be changed when website is published; of course
 $_SESSION['root'] = 'root';
 
-include_once __DIR__."/includes/models/CharaTable.php";
-include_once __DIR__."/includes/models/TeamsTable.php";
+include_once __DIR__."/includes/models/Characters.php";
+include_once __DIR__."/includes/models/Teams.php";
 include_once __DIR__."/includes/models/Access.php";
 include_once __DIR__."/includes/models/StaticMethods.php";
 
-$chara_toolbox = new CharaTable();
-$team_toolbox = new TeamsTable();
+$chara_toolbox = new Characters();
+$team_toolbox = new Teams();
 
 // first team randomization upon arrival on page
 if (!isset($_POST))

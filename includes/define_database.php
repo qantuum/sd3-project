@@ -22,34 +22,35 @@ $database = new Medoo([
 class Constants {
 
 	const TABLE_SD3_CHARAS = "characters";
-	const TABLE_SD3_CHARAS_ID = "id";
-	const TABLE_SD3_CHARAS_NAME = "name";
-	const TABLE_SD3_CHARAS_CLASS = "class";
-	const TABLE_SD3_CHARAS_IMG = "img_src";
-	const TABLE_SD3_CHARAS_LIGHT_DARK = "light_dark";
-	const TABLE_SD3_CHARAS_SCORE = "score";
-	const TABLE_SD3_CHARAS_MIN_STATS = "min_stats";
-	const TABLE_SD3_CHARAS_MAX_STATS = "max_stats";
-	const TABLE_SD3_CHARAS_SPELLS = "spells";
-	const TABLE_SD3_CHARAS_TECHS = "techs";
-	const TABLE_SD3_CHARAS_PROS = "pros";
-	const TABLE_SD3_CHARAS_CONS = "cons";
-	const TABLE_SD3_CHARAS_AFFILIATES = "affiliates";
+	const TABLE_SD3_CHARAS_ID = "charas_id";
+	const TABLE_SD3_CHARAS_NAME = "charas_name";
+	const TABLE_SD3_CHARAS_CLASS = "charas_class";
+	const TABLE_SD3_CHARAS_IMG = "charas_img_src";
+	const TABLE_SD3_CHARAS_LIGHT_DARK = "charas_light_dark";
+	const TABLE_SD3_CHARAS_SCORE = "charas_score";
+	const TABLE_SD3_CHARAS_MIN_STATS = "charas_min_stats";
+	const TABLE_SD3_CHARAS_MAX_STATS = "charas_max_stats";
+	const TABLE_SD3_CHARAS_SPELL_STATS = "charas_spell_stats";
+	const TABLE_SD3_CHARAS_SPELLS = "charas_spells";
+	const TABLE_SD3_CHARAS_TECHS = "charas_techs";
+	const TABLE_SD3_CHARAS_PROS = "charas_pros";
+	const TABLE_SD3_CHARAS_CONS = "charas_cons";
+	const TABLE_SD3_CHARAS_AFFILIATES = "charas_affiliates";
 
 	const ACCESS = "root$";
 	const ROOT_ID = "root_id$";
 	const ROOT_PSWD = "root_pswd";
 
 	const TABLE_SD3_TEAMS = "teams";
-	const TABLE_SD3_TEAMS_ID = "team_id";
-	const TABLE_SD3_TEAMS_TRIAD = "team_triad";
-	const TABLE_SD3_TEAMS_BASE_SCORE = "team_base_score";
-	const TABLE_SD3_TEAMS_FINAL_SCORE = "team_final_score";
-	const TABLE_SD3_TEAMS_PROS = "team_pros";
-	const TABLE_SD3_TEAMS_CONS = "team_cons";
-	const TABLE_SD3_TEAMS_QUEST = "team_quest";
-	const TABLE_SD3_TEAMS_BETTER = "team_better";
-	const TABLE_SD3_TEAMS_HAS_SPELL = "team_has_spell";
+	const TABLE_SD3_TEAMS_ID = "teams_id";
+	const TABLE_SD3_TEAMS_TRIAD = "teams_triad";
+	const TABLE_SD3_TEAMS_BASE_SCORE = "teams_base_score";
+	const TABLE_SD3_TEAMS_FINAL_SCORE = "teams_final_score";
+	const TABLE_SD3_TEAMS_PROS = "teams_pros";
+	const TABLE_SD3_TEAMS_CONS = "teams_cons";
+	const TABLE_SD3_TEAMS_QUEST = "teams_quest";
+	const TABLE_SD3_TEAMS_BETTER = "teams_better";
+	const TABLE_SD3_TEAMS_HAS_SPELL = "teams_has_spell";
 
 	const TABLE_TIPS = "tips";
 	const TABLE_TIPS_ID = "tips_id";
@@ -58,7 +59,7 @@ class Constants {
 }
 
 // DO NOT CHANGE ONCE EVERYTHING IS REGISTERED IN "charas" DB !!!
-class TargetSpells {
+/* class TargetSpells {
 	// sabers
 	const ELEM_SABERS_ST = "ST elemental sabers";
 	const ELEM_SABERS_MT = "MT elemental sabers";
@@ -77,6 +78,4 @@ class TargetSpells {
 	const AURA_WAVE = "aura wave";
 	// Jutsus
 	const JUTSUS = "jutsus";
-
-
-}
+} */
