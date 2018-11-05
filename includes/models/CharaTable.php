@@ -32,10 +32,10 @@ class CharaTable
 		$res = $database->update(Constants::TABLE_SD3_CHARAS, [
 			Constants::TABLE_SD3_CHARAS_LIGHT_DARK => $light_dark,
 			Constants::TABLE_SD3_CHARAS_SCORE => $score,
-			Constants::TABLE_SD3_CHARAS_MIN_STATS => json_encode(explode(", ", $min_stats)),
-			Constants::TABLE_SD3_CHARAS_MAX_STATS => json_encode(explode(", ", $max_stats)),
-			Constants::TABLE_SD3_CHARAS_SPELLS => json_encode(explode(", ", $spells)),
-			Constants::TABLE_SD3_CHARAS_TECHS => json_encode(explode(", ", $techs)),
+			Constants::TABLE_SD3_CHARAS_MIN_STATS => $min_stats,
+			Constants::TABLE_SD3_CHARAS_MAX_STATS => $max_stats,
+			Constants::TABLE_SD3_CHARAS_SPELLS => $spells,
+			Constants::TABLE_SD3_CHARAS_TECHS => $techs,
 			Constants::TABLE_SD3_CHARAS_PROS => $pros,
 			Constants::TABLE_SD3_CHARAS_CONS => $cons,
 			Constants::TABLE_SD3_CHARAS_AFFILIATES => $affiliates
@@ -51,13 +51,6 @@ class CharaTable
 		$data = $database->get(Constants::TABLE_SD3_CHARAS, "*", [
 			Constants::TABLE_SD3_CHARAS_ID => $id
 		] );
-		if ($data)
-		{
-			$data[Constants::TABLE_SD3_CHARAS_MIN_STATS] = implode(", ", json_decode($data[Constants::TABLE_SD3_CHARAS_MIN_STATS], true));
-			$data[Constants::TABLE_SD3_CHARAS_MAX_STATS] = implode(", ", json_decode($data[Constants::TABLE_SD3_CHARAS_MAX_STATS], true));
-			$data[Constants::TABLE_SD3_CHARAS_SPELLS] = implode(", ", json_decode($data[Constants::TABLE_SD3_CHARAS_SPELLS], true));
-			$data[Constants::TABLE_SD3_CHARAS_TECHS] = implode(", ", json_decode($data[Constants::TABLE_SD3_CHARAS_TECHS], true));
-		}
 		return $data ;
 	}
 
@@ -67,13 +60,6 @@ class CharaTable
 		$data = $database->select(Constants::TABLE_SD3_CHARAS, "*", [
 			Constants::TABLE_SD3_CHARAS_NAME => $name
 		] );
-		foreach ($data as $line)
-		{
-			$line[Constants::TABLE_SD3_CHARAS_MIN_STATS] = implode(", ", json_decode($line[Constants::TABLE_SD3_CHARAS_MIN_STATS], true));
-			$line[Constants::TABLE_SD3_CHARAS_MAX_STATS] = implode(", ", json_decode($line[Constants::TABLE_SD3_CHARAS_MAX_STATS], true));
-			$line[Constants::TABLE_SD3_CHARAS_SPELLS] = implode(", ", json_decode($line[Constants::TABLE_SD3_CHARAS_SPELLS], true));
-			$line[Constants::TABLE_SD3_CHARAS_TECHS] = implode(", ", json_decode($line[Constants::TABLE_SD3_CHARAS_TECHS], true));
-		}
 		return $data ;
 	}
 
@@ -104,13 +90,6 @@ class CharaTable
 		], [
 			Constants::TABLE_SD3_CHARAS_ID => $id
 		] );
-		if ($data)
-		{
-			$data[Constants::TABLE_SD3_CHARAS_MIN_STATS] = implode(", ", json_decode($data[Constants::TABLE_SD3_CHARAS_MIN_STATS], true));
-			$data[Constants::TABLE_SD3_CHARAS_MAX_STATS] = implode(", ", json_decode($data[Constants::TABLE_SD3_CHARAS_MAX_STATS], true));
-			$data[Constants::TABLE_SD3_CHARAS_SPELLS] = implode(", ", json_decode($data[Constants::TABLE_SD3_CHARAS_SPELLS], true));
-			$data[Constants::TABLE_SD3_CHARAS_TECHS] = implode(", ", json_decode($data[Constants::TABLE_SD3_CHARAS_TECHS], true));
-		}
 		return $data ;
 	}
 
