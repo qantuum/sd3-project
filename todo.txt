@@ -1,0 +1,2 @@
+--tout refactoriser en singletons (pas d'interaction avec utilisateur donc pas la peine d'instancier tout un tas d'objets)
+--tout re-passer les JSON (speels, techs, etc) en texte avec encore une ration de RegEx pour être sûr -- conversions texte<>tableau
